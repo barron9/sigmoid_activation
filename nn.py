@@ -6,23 +6,32 @@ class simpel():
     def __init__(self):
         rg = Generator(PCG64())
         rg.standard_normal()
-        #print(rg.standard_normal((3,1)))
+        self.weights = np.array([[0.01122252],[-0.06420096],[0.40555929]])
         v=np.array([[0,0,1],
                     [1,1,1],
                     [1,0,1],
                     [0,1,1]])
-        print(v)
-        print(v.T)
-        print("adjustment for .2 error and np.array([[1,1,1]]) output with derivative fn")
-
-        print(np.dot(v.T , ( .02 * np.array([[.1,1,.1,1]]).T * (1 - np.array([[.1,1,.1,1]]).T) ) ))
+        #print(v)
+        #print(v.T)
         print("start weights")
-        self.weights=rg.standard_normal((3,1))
+        print(self.weights)
+        #print("adjustment for .2 error and np.array([[1,1,1]]) output with derivative fn")
+        #print(np.array([[.1,1,.1,1]]).T * (1 - np.array([[.1,1,.1,1]]).T) )
+        for k in range(100):
+            output=self.activationfunc(np.dot(v, self.weights))
+            expected_outputs = np.array([[0,1,1,0]]).T
+            derivatedoutputoversigmoid= self.d_activationfunc(output)
+            error=expected_outputs-output
+
+            print( " == error is "+str(error.T))
+            adjus = np.dot(v.T , ( error * derivatedoutputoversigmoid ))
+            self.weights +=adjus
+        #print(np.dot(v.T , ( error * derivatedoutputoversigmoid )))
+        print("last weights")
         print(self.weights)
 
     def activationfunc(self,x):
-        print("activation func")
-        print(1 / (1 + np.exp(-x)))
+
         return 1 / (1 + np.exp(-x))
 
     def d_activationfunc(self,x):
@@ -40,4 +49,4 @@ class simpel():
 
 if __name__ == "__main__":
     simple = simpel()
-    simple.activationfunc(simple.weights)
+    ##simple.activationfunc(simple.weights)
