@@ -6,8 +6,8 @@ class simpel():
     def __init__(self):
         rg = Generator(PCG64())
         rg.standard_normal()
-        self.weights = np.array([[0.01122252],[-0.06420096],[0.40555929]])
-        v=np.array([[0,0,1],
+        self.weights = np.array([[0.01122252],[0.06420096],[0.40555929]])
+        input=np.array([[0,0,1],
                     [1,1,1],
                     [1,0,1],
                     [0,1,1]])
@@ -18,15 +18,14 @@ class simpel():
         #print("adjustment for .2 error and np.array([[1,1,1]]) output with derivative fn")
         #print(np.array([[.1,1,.1,1]]).T * (1 - np.array([[.1,1,.1,1]]).T) )
         for k in range(100):
-            output=self.activationfunc(np.dot(v, self.weights))
+            output=self.activationfunc(np.dot(input, self.weights))
             expected_outputs = np.array([[0,1,1,0]]).T
             derivatedoutputoversigmoid= self.d_activationfunc(output)
             error=expected_outputs-output
 
             print( " == error is "+str(error.T))
-            adjus = np.dot(v.T , ( error * derivatedoutputoversigmoid ))
+            adjus = np.dot(input.T , ( error * derivatedoutputoversigmoid ))
             self.weights +=adjus
-        #print(np.dot(v.T , ( error * derivatedoutputoversigmoid )))
         print("last weights")
         print(self.weights)
 
