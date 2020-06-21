@@ -14,6 +14,7 @@ class simpel():
 
         print("start weights")
         print(self.weights)
+        self.train(input,0,1000)
 
     def activationfunc(self, x):
         return (1 / (1 + np.exp(-x)))
@@ -22,7 +23,7 @@ class simpel():
         return x * (1- x)
 
     def train(self,input,output,repeat):
-        for k in range(1000):
+        for k in range(repeat):
             output = self.think(input)
             expected_outputs = (np.array([[1,1,0,1]]).T)
             derivatedoutputoversigmoid = self.d_activationfunc(output)
