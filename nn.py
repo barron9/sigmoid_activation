@@ -6,7 +6,7 @@ class simpel():
     def __init__(self):
         rg = Generator(PCG64())
         rg.standard_normal()
-        self.weights = np.array([[0.01122252],[0.06420096],[0.40555929]])
+        self.weights = (np.array([[0.01122252],[0.06420096],[0.40555929]]))
         input=np.array([[0,0,1],
                     [1,1,1],
                     [1,0,1],
@@ -19,7 +19,7 @@ class simpel():
         #print(np.array([[.1,1,.1,1]]).T * (1 - np.array([[.1,1,.1,1]]).T) )
         for k in range(1000):
             output=self.activationfunc(np.dot(input, self.weights))
-            expected_outputs = self.activationfunc(np.array([[10,11,11,10]]).T)
+            expected_outputs = (np.array([[1,1,0,1]]).T)
             derivatedoutputoversigmoid= self.d_activationfunc(output)
             error=expected_outputs-output
 
@@ -29,7 +29,7 @@ class simpel():
         print("last weights")
         print(self.weights)
 
-        print("cevap np.dot(([[1,1,1]]) için " + str(np.dot(([[1,1,1]]), self.weights)))
+        print("cevap np.dot(([[0,0,1]]) için " + str(self.activationfunc(np.dot(np.array([[0,0,1]]), self.weights))))
 
     def activationfunc(self,x):
 
