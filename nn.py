@@ -19,7 +19,7 @@ class simpel():
         #print(np.array([[.1,1,.1,1]]).T * (1 - np.array([[.1,1,.1,1]]).T) )
         for k in range(100):
             output=self.activationfunc(np.dot(input, self.weights))
-            expected_outputs = np.array([[0,1,1,0]]).T
+            expected_outputs = self.activationfunc(np.array([[10,11,11,10]]).T)
             derivatedoutputoversigmoid= self.d_activationfunc(output)
             error=expected_outputs-output
 
