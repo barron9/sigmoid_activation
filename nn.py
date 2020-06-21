@@ -29,14 +29,14 @@ class simpel():
         print("last weights")
         print(self.weights)
 
-        print("cevap np.dot(([[0,0,1]]) için " + str(self.activationfunc(np.dot(np.array([[0,0,1]]), self.weights))))
+        print("cevap np.dot(([[0,0,1]]) için " + str(self.activationfunc(np.dot(np.array([[1,0,1]]), self.weights))))
 
     def activationfunc(self,x):
 
         return 1 / (1 + np.exp(-x))
 
     def d_activationfunc(self,x):
-        return 1
+        return x * (1- x)
 
     def train(self,input,output,repeat):
 
