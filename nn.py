@@ -17,7 +17,7 @@ class simpel():
         print(self.weights)
         #print("adjustment for .2 error and np.array([[1,1,1]]) output with derivative fn")
         #print(np.array([[.1,1,.1,1]]).T * (1 - np.array([[.1,1,.1,1]]).T) )
-        for k in range(100):
+        for k in range(1000):
             output=self.activationfunc(np.dot(input, self.weights))
             expected_outputs = self.activationfunc(np.array([[10,11,11,10]]).T)
             derivatedoutputoversigmoid= self.d_activationfunc(output)
@@ -28,6 +28,8 @@ class simpel():
             self.weights +=adjus
         print("last weights")
         print(self.weights)
+
+        print("cevap np.dot(([[1,1,1]]) için " + str(np.dot(([[1,1,1]]), self.weights)))
 
     def activationfunc(self,x):
 
