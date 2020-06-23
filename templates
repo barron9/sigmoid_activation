@@ -2,9 +2,9 @@
 
 import numpy as np
 
-input=np.array([[1,2,3],
-                [1,2,4],
-                [1,0,3]])
+input=np.array([[1,0,1],
+                [1,1,1],
+                [1,.4,.2]])
 
 weights=np.array([[.0051],
                   [.0021],
@@ -17,24 +17,35 @@ print(input@weights) #  Σ sypansis output to whole (single) neuron from input
 output=input@weights
 
 #MULTIPLE NEURON PERCEPTION
+def sigmoid(x):
+    return (1 / (1 + np.exp(-x)))
+def derivative_sigmoid(x):
+    return x*(1-x)
+def train(input,output,weights_to_neuron_one,weights_to_neuron_two):
+    output_of_neuron_one = sigmoid(input@weights_to_neuron_one)
+    output_of_neuron_two = sigmoid(input@weights_to_neuron_two)
+    error1=(output.T-output_of_neuron_one)#error1
+    error2=(output.T-output_of_neuron_two)#error1
+    #print("drv_sg")
+    #print( error1 )
+    #print(output_of_neuron_one)
+    #print( derivative_sigmoid(output_of_neuron_one))
+    weights_to_neuron_one +=np.dot(input.T , ( error1 * derivative_sigmoid(output_of_neuron_one) )) #chain rule
+    weights_to_neuron_two +=np.dot(input.T , ( error2 * derivative_sigmoid(output_of_neuron_two) ))
+    print(error1.T)
+input=np.array([[1,0,1],
+                [1,1,1],
+                [1,0,0]])
 
-input=np.array([[1,2,3],
-                [1,2,4],
-                [1,0,3]])
+weights_to_neuron_one=np.array([[.1071],
+                                [.1021],
+                                [.1101]])
+weights_to_neuron_two=np.array([[.0151],
+                               [.1031],
+                               [.2011]])
 
-weights_to_neuron_one=np.array([[.0071],
-                                [.0021],
-                                [.0101]])
-weights_to_neuron_two=np.array([[.0051],
-                               [.0031],
-                               [.0011]])
+expectedoutput=np.array([[0,0,1]])
+for x in range(1000):
+    train(input,expectedoutput,weights_to_neuron_one,weights_to_neuron_two)
 
-
-print(input@weights_to_neuron_one) # Σ sypansis output to whole (1st) neuron from input
-print(input@weights_to_neuron_two) # Σ sypansis output to whole (2nd) neuron from input
-
-output_of_neuron_one = input@weights_to_neuron_one
-output_of_neuron_two = input@weights_to_neuron_two
-
-print(output_of_neuron_one)
-print(output_of_neuron_two)
+print(sigmoid(np.array([[1,0,0]])@weights_to_neuron_one))
