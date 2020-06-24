@@ -1,0 +1,77 @@
+#include <iostream>
+using namespace std;
+
+
+class Test
+{
+private:
+    int data1;
+    float data2;
+    
+public:
+    Test(){
+        
+    }
+    void function1()
+    {   data1 = 2;  }
+    
+    float function2()
+    {
+        data2 = 3.5;
+        return data2;
+    }
+};
+
+struct Callback
+{
+    double execTime;
+    int (*func)(int x, int y);
+};
+
+int max (int x, int y)
+{
+    return (x > y) ? x : y;
+}
+enum season
+{   spring,
+    summer = 4,
+    autumn = 8,
+    winter = 12
+} card;
+
+int main() {
+    
+    //int l[3][4];
+    int x=5;
+    int &time=x;
+    int *ptr_x = &time;
+    Callback *cptr;
+    Callback cb;
+    cb.func = max;
+    card = spring;
+    std::cout << card+5 <<endl;
+    std::cout << card <<endl;
+    std::cout << sizeof(season) <<endl;
+    
+    //error int &y = &x;
+    //std::cout << &x << " : " << &y << " " << v <<"\n";
+    uint8_t flag = 0;
+    return 0;
+    while(1) // main loop
+    {
+        if (flag == 1)
+        {
+            std::cout << "interrupted, flag=1"<<endl;
+            flag = 0;
+            
+        }
+        if(time ==100){
+            flag=1;
+            std::cout << time << endl;
+            flag=0;
+        }
+        cout << (*ptr_x) << endl;
+        (*ptr_x)++;
+    }
+    return 0;
+}
