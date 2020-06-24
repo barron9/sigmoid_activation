@@ -9,7 +9,10 @@ private:
     float data2;
     
 public:
-    Test(){
+    Test():data1(4),data2(5.0){
+        
+    }
+    Test(int i1){
         
     }
     void function1()
@@ -40,19 +43,25 @@ enum season
 } card;
 
 int main() {
-    
+    Test t1,t2;
     //int l[3][4];
     int x=5;
     int &time=x;
-    int *ptr_x = &time;
+    int * ptr_x1 = &time;
+    int * ptr_x = &x;
     Callback *cptr;
     Callback cb;
     cb.func = max;
     card = spring;
+    std::cout << ptr_x1<<endl;
+
+    std::cout << ptr_x<<endl;
+
     std::cout << card+5 <<endl;
     std::cout << card <<endl;
     std::cout << sizeof(season) <<endl;
-    
+    std::cout << t2.function2() <<endl;
+
     //error int &y = &x;
     //std::cout << &x << " : " << &y << " " << v <<"\n";
     uint8_t flag = 0;
